@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
+[ext_resource path="res://Interactable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game.gd" type="Script" id=2]
 [ext_resource path="res://blob/blob_stand1.png" type="Texture" id=3]
 [ext_resource path="res://blob/blob_stand2.png" type="Texture" id=4]
@@ -9,6 +10,7 @@
 [ext_resource path="res://blob/blob_jump4.png" type="Texture" id=8]
 [ext_resource path="res://blob/blob_jump1.png" type="Texture" id=9]
 [ext_resource path="res://Player.gd" type="Script" id=10]
+[ext_resource path="res://icon.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6.9375, 128.25 )
@@ -38,10 +40,17 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 15, 16 )
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 27.5, 27.5 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 15.5, 13.5 )
+
 [node name="game" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Boundary" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="left" type="CollisionShape2D" parent="Boundary"]
 position = Vector2( -7, 127.75 )
@@ -75,3 +84,24 @@ animation = "stand"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource( 2 )
+
+[node name="Clothes Table" type="StaticBody2D" parent="."]
+position = Vector2( 97, 106 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Interactable" parent="Clothes Table" instance=ExtResource( 1 )]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="InteractableArea" type="CollisionShape2D" parent="Clothes Table/Interactable"]
+shape = SubResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="Clothes Table"]
+scale = Vector2( 0.5, 0.4375 )
+texture = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Clothes Table"]
+shape = SubResource( 8 )
