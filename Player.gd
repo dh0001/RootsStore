@@ -2,13 +2,21 @@ extends KinematicBody2D
 
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
-onready var _animated_sprite = $AnimatedSprite
 onready var direction = Direction.RIGHT
 export var speed = 400 # How fast the player will move (pixels/sec).
 
 func _ready():
 	# face right on start up
-	_animated_sprite.animation = "right" 
+	$AnimatedSprite.animation = "right" 
+	
+func _physics_process(delta):
+	var velocity = get_velocity()
+	var motion = velocity * delta 
+	
+	set_direction(motion)
+	set_interaction_box()
+	set_animation(motion.length() == 0)
+	move_and_collide(motion)
 	
 func get_velocity():
 	var velocity = Vector2.ZERO
@@ -36,6 +44,7 @@ func set_direction(motion):
 func set_animation(stop_animation: bool):
 	if stop_animation:
 		$AnimatedSprite.stop()
+		$AnimatedSprite.frame = 1
 		return
 		
 	var dir = "right"
@@ -46,11 +55,13 @@ func set_animation(stop_animation: bool):
 		Direction.RIGHT: dir = "right"
 	$AnimatedSprite.animation = dir
 	$AnimatedSprite.play()
-
-func _physics_process(delta):
-	var velocity = get_velocity()
-	var motion = velocity * delta 
 	
-	set_direction(motion)
-	set_animation(motion.length() == 0)
-	move_and_collide(motion)
+func set_interaction_box():
+	var dirs_dict = {
+		Direction.UP: Vector2(0, -15),
+		Direction.DOWN: Vector2(0, 20),
+		Direction.LEFT: Vector2(-13, 2.5),
+		Direction.RIGHT: Vector2(13, 2.5),
+	}
+	var box: CollisionShape2D = get_node(@"InteractionBox/InteractionBoxCollisionShape")
+	box.position = dirs_dict[direction]
