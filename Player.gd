@@ -18,11 +18,26 @@ func _physics_process(delta):
 	velocity = velocity.normalized() * speed
 	var motion = velocity * delta 
 	
-	if test_move(self.transform, motion):
-		_animated_sprite.animation = "walk"
+	if velocity.x < 0:
+		$AnimatedSprite.animation = "left"
+	elif velocity.x > 0:
+		$AnimatedSprite.animation = "right"
+	elif velocity.y < 0:
+		$AnimatedSprite.animation = "up"
+	elif velocity.y > 0:
+		$AnimatedSprite.animation = "down"
+		
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * speed
+		$AnimatedSprite.play()
 	else:
-		_animated_sprite.animation = "stand"
-	_animated_sprite.play()
+		$AnimatedSprite.stop()
+		
+#	if test_move(self.transform, motion):
+#		_animated_sprite.animation = "walk"
+#	else:
+#		_animated_sprite.animation = "stand"
+#	_animated_sprite.play()
 
 	move_and_collide(motion)
 	
