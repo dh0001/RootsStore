@@ -1,15 +1,11 @@
-extends Area2D
+extends KinematicBody2D
 
-
+onready var _animated_sprite = $AnimatedSprite
 export var speed = 400 # How fast the player will move (pixels/sec).
-var screen_size # Size of the game window.
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	screen_size = get_viewport_rect().size
-	
-func _process(delta):
+func _physics_process(delta):
 	var velocity = Vector2.ZERO
+	
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -18,17 +14,41 @@ func _process(delta):
 		velocity.y -= 1
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
-
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-		$AnimatedSprite.animation = "walk"
-	else:
-		$AnimatedSprite.animation = "stand"
-	$AnimatedSprite.play()
 		
-	position += velocity * delta
-	position.x = clamp(position.x, 0, screen_size.x)
-	position.y = clamp(position.y, 0, screen_size.y)
+	velocity = velocity.normalized() * speed
+	var motion = velocity * delta 
+	
+	if test_move(self.transform, motion):
+		_animated_sprite.animation = "walk"
+	else:
+		_animated_sprite.animation = "stand"
+	_animated_sprite.play()
+
+	move_and_collide(motion)
+	
+#func _process(delta):
+#	_animated_sprite.play()
+#func _process(delta):
+#	var velocity = Vector2.ZERO
+#	if Input.is_action_pressed("move_right"):
+#		velocity.x += 1
+#	if Input.is_action_pressed("move_left"):
+#		velocity.x -= 1
+#	if Input.is_action_pressed("move_up"):
+#		velocity.y -= 1
+#	if Input.is_action_pressed("move_down"):
+#		velocity.y += 1
+#
+#	if velocity.length() > 0:
+#		velocity = velocity.normalized() * speed
+#		$AnimatedSprite.animation = "walk"
+#	else:
+#		$AnimatedSprite.animation = "stand"
+#	$AnimatedSprite.play()
+#
+#	position += velocity * delta
+#	position.x = clamp(position.x, 0, get_viewport_rect().size.x)
+#	position.y = clamp(position.y, 0, get_viewport_rect().size.y)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
