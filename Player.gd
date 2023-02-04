@@ -15,27 +15,29 @@ func get_velocity():
 		velocity.y += 1
 		
 	velocity = velocity.normalized() * speed
-	var motion = velocity * delta 
 	
 		
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play()
 	return velocity.normalized() * speed
 
 func set_animation(motion):
-	if velocity.x < 0:
+	if motion.x < 0:
 		$AnimatedSprite.animation = "left"
-	elif velocity.x > 0:
+	elif motion.x > 0:
 		$AnimatedSprite.animation = "right"
-	elif velocity.y < 0:
+	elif motion.y < 0:
 		$AnimatedSprite.animation = "up"
-	elif velocity.y > 0:
+	elif motion.y > 0:
 		$AnimatedSprite.animation = "down"
 
-	if test_move(self.transform, motion):
-		_animated_sprite.animation = "walk"
+
+	if motion.length() > 0:
+		$AnimatedSprite.play()
 	else:
+		$AnimatedSprite.stop()
+		
+	if test_move(self.transform, motion):
 		$AnimatedSprite.stop()
 		
 #	if test_move(self.transform, motion):
