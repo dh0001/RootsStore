@@ -14,11 +14,6 @@ func get_velocity():
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
 		
-	velocity = velocity.normalized() * speed
-	
-		
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
 	return velocity.normalized() * speed
 
 func set_animation(motion):
@@ -30,21 +25,11 @@ func set_animation(motion):
 		$AnimatedSprite.animation = "up"
 	elif motion.y > 0:
 		$AnimatedSprite.animation = "down"
-
-
+		
 	if motion.length() > 0:
 		$AnimatedSprite.play()
 	else:
 		$AnimatedSprite.stop()
-		
-	if test_move(self.transform, motion):
-		$AnimatedSprite.stop()
-		
-#	if test_move(self.transform, motion):
-#		_animated_sprite.animation = "walk"
-#	else:
-#		_animated_sprite.animation = "stand"
-#	_animated_sprite.play()
 
 func _physics_process(delta):
 	var velocity = get_velocity()
