@@ -7,14 +7,39 @@ export var speed = 200 # How fast the player will move (pixels/sec).
 
 var cust_type = 0
 
+var path: Array = [] # positions of path
+var customerNavigation: Navigation2D = null
+
+onready var line2d = $Line2D
+
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():	
 	randomize()
 	cust_type = (randi() % 4) + 1
-	print("cust_type: ", cust_type)
+	
+	customerNavigation = get_node("/root/game/CustomerNavigation")
+	
+func navigate():
+	var velocity = Vector2.ZERO
+	if path.size() > 0:
+		velocity = global_position.direction_to(path[1]) * speed
+		
+		if global_position == path[0]:
+			path.pop_front()
+	return velocity
+	
+func generate_path():
+	if customerNavigation != null:
+		path = customerNavigation.get_simple_path(global_position, Vector2(300,100), false)
+	line2d.points = path
 
 func _physics_process(delta):
-	var velocity = get_velocity()
+	var velocity = Vector2.ZERO
+	line2d.global_position = Vector2.ZERO
+	if customerNavigation:
+		generate_path()
+		velocity = navigate()
+	#velocity = get_velocity()
 	var motion = velocity * delta 
 	
 	set_direction(motion)
@@ -23,14 +48,15 @@ func _physics_process(delta):
 	
 func get_velocity():
 	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
+	velocity.x -= 1
+#	if Input.is_action_pressed("move_right"):
+#		velocity.x += 1
+#	if Input.is_action_pressed("move_left"):
+#		velocity.x -= 1
+#	if Input.is_action_pressed("move_up"):
+#		velocity.y -= 1
+#	if Input.is_action_pressed("move_down"):
+#		velocity.y += 1
 		
 	return velocity.normalized() * speed
 
