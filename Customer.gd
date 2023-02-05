@@ -28,6 +28,7 @@ func _ready():
 	new_destination()
 	
 func new_destination():
+	reached_destination = false
 	destination = Vector2(rand_range(50,475), rand_range(50,250))
 	destination = customerNavigation.get_closest_point(destination)
 	
@@ -60,7 +61,6 @@ func _physics_process(delta):
 		if has_item:
 			queue_free()
 		else:	
-			reached_destination = false
 			new_destination()
 		
 	if customerNavigation:
@@ -123,3 +123,9 @@ func interact(player: KinematicBody2D):
 		global.score += 100
 	else:
 		global.score -= 50
+
+
+func _on_Timer_timeout():
+	if !has_item:
+		new_destination()
+		

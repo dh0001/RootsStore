@@ -303,3 +303,9 @@ shape = SubResource( 68 )
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
 width = 2.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
