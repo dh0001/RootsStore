@@ -121,7 +121,6 @@ extents = Vector2( 6, 8.5 )
 extents = Vector2( 5.5, 8.5 )
 
 [node name="game" type="Area2D"]
-position = Vector2( 0, 28 )
 script = ExtResource( 2 )
 
 [node name="Boundary" type="StaticBody2D" parent="."]
@@ -305,11 +304,11 @@ position = Vector2( 13, 2.5 )
 shape = SubResource( 20 )
 
 [node name="ItemGui" type="Sprite" parent="."]
-position = Vector2( 20, -14 )
+position = Vector2( 21, 15 )
 scale = Vector2( 1.66667, 1.16667 )
 texture = ExtResource( 4 )
 
 [node name="CurrentlyHeldItem" type="Sprite" parent="."]
-position = Vector2( 20, -14 )
+position = Vector2( 21, 15 )
 scale = Vector2( 2.1, 2.1 )
 script = ExtResource( 7 )
