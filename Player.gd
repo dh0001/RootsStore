@@ -5,6 +5,8 @@ enum Direction { UP, DOWN, LEFT, RIGHT }
 onready var direction = Direction.RIGHT
 export var speed = 400 # How fast the player will move (pixels/sec).
 
+var item: String = ""
+
 func _ready():
 	# face right on start up
 	$AnimatedSprite.animation = "right" 
@@ -65,3 +67,14 @@ func set_interaction_box():
 	}
 	var box: CollisionShape2D = get_node(@"InteractionBox/InteractionBoxCollisionShape")
 	box.position = dirs_dict[direction]
+
+func acquire_item(item: String):
+	print("acquiring item " + item)
+	item = item
+
+func has_item():
+	return item != ""
+
+func submit_item():
+	item = ""
+	return item

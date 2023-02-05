@@ -5,9 +5,8 @@ func interact(areas: Array):
 		return
 	
 	var area = areas[0] # only interact with the 0th element
-	print("trying to interact with " + area.name)
 	if area.has_method("interact"):
-		area.interact()
+		area.interact(self.get_parent())
 
 func _input(ev):
 	if Input.is_action_pressed("select"):
