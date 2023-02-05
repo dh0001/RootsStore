@@ -13,15 +13,17 @@ var destination: Vector2 = Vector2.ZERO
 var reached_destination: bool = false
 var has_item: bool = false
 
+var curr_requested_item = ""
 
 onready var line2d = $Line2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	print(destination)
 	randomize()
 	cust_type = (randi() % 4) + 1
-	
+	var items = ["bag1", "bag2", "boot1", "boot2", "hat1", "hat2", "heel1",
+	"heel2", "pants1", "pants2", "shirt1", "shirt2"]
+	request_item(items[randi() % items.size()])
 	customerNavigation = get_node("/root/game/CustomerNavigation")
 	new_destination()
 	
@@ -36,8 +38,6 @@ func navigate():
 	if path.size() > 0:
 		velocity = global_position.direction_to(path[1]) * speed
 		
-		print(position)
-		print(global_position)
 		if global_position == path[0]:
 			path.pop_front()
 	return velocity
@@ -101,21 +101,23 @@ func set_animation(stop_animation: bool):
 
 	$AnimatedSprite.animation = "customer" + str(cust_type) + "_" + dir
 	$AnimatedSprite.play()
-	
-var items = ["bag1", "bag2", "boot1", "boot2", "hat1", "hat2", "heel1",
-	"heel2", "pants1", "pants2", "shirt1", "shirt2"]
-var item_idx = 0
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.scancode == KEY_B:
-			if item_idx % 2 == 0:
-				request_item(items[randi() % items.size()])
-			else:
-				finish_request()
-			item_idx += 1
 				
 func request_item(item: String):
+	curr_requested_item = item
 	self.get_node("RequestItemTextBox").request_item(item)
 
-func finish_request():
-	self.get_node("RequestItemTextBox").finish_request()
+func finish_request(given_item: String) -> bool:
+	if given_item == curr_requested_item:
+		self.get_node("RequestItemTextBox").finish_request()
+		return true
+	return false
+
+func interact(player: KinematicBody2D):
+	if !player.has_item():
+		return
+		
+	var item = player.submit_item()
+	if finish_request(item):
+		global.score += 100
+	else:
+		global.score -= 50

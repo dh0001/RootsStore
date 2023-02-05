@@ -1,6 +1,7 @@
 extends Area2D
 
 func interact(areas: Array) -> void:
+#	print(areas)
 	if areas.size() == 0:
 		return
 	
@@ -9,5 +10,5 @@ func interact(areas: Array) -> void:
 		area.interact(self.get_parent())
 
 func _input(ev):
-	if Input.is_action_pressed("select"):
+	if ev.is_action_pressed("select"):
 		interact(self.get_overlapping_bodies())

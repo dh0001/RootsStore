@@ -23,13 +23,5 @@ func interact(player: KinematicBody2D) -> void:
 	for method in methods:
 		if !player.has_method(method): return
 	
-	if player.has_item():
-		var item = player.submit_item()
-		print("trying to submit item " + item)
-		# TODO:
-		# check to see if player has correct item.
-		# If yes, consume item and increment score
-		# If no, consume item and decrement score
-	else:
-		player.acquire_item(node_to_item[self.name])
+	player.acquire_item(node_to_item[self.name])
 	
