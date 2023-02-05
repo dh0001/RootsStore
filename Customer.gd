@@ -18,7 +18,9 @@ onready var line2d = $Line2D
 func _ready():	
 	randomize()
 	cust_type = (randi() % 4) + 1
-	
+	var items = ["bag1", "bag2", "boot1", "boot2", "hat1", "hat2", "heel1",
+	"heel2", "pants1", "pants2", "shirt1", "shirt2"]
+	request_item(items[randi() % items.size()])
 	customerNavigation = get_node("/root/game/CustomerNavigation")
 	
 func navigate():
@@ -76,18 +78,6 @@ func set_animation(stop_animation: bool):
 
 	$AnimatedSprite.animation = "customer" + str(cust_type) + "_" + dir
 	$AnimatedSprite.play()
-	
-var items = ["bag1", "bag2", "boot1", "boot2", "hat1", "hat2", "heel1",
-	"heel2", "pants1", "pants2", "shirt1", "shirt2"]
-var item_idx = 0
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.scancode == KEY_B:
-			if item_idx % 2 == 0:
-				request_item(items[randi() % items.size()])
-			else:
-				finish_request(curr_requested_item)
-			item_idx += 1
 				
 func request_item(item: String):
 	curr_requested_item = item
