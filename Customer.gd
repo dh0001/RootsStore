@@ -15,6 +15,7 @@ onready var line2d = $Line2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
+	print(destination)
 	randomize()
 	cust_type = (randi() % 4) + 1
 	
@@ -22,9 +23,13 @@ func _ready():
 	
 func navigate():
 	var velocity = Vector2.ZERO
+	
+	
 	if path.size() > 0:
 		velocity = global_position.direction_to(path[1]) * speed
 		
+		print(position)
+		print(global_position)
 		if global_position == path[0]:
 			path.pop_front()
 	return velocity
@@ -39,6 +44,7 @@ func _physics_process(delta):
 	var velocity = Vector2.ZERO
 	line2d.global_position = Vector2.ZERO
 	if customerNavigation and (global_position.distance_to(destination) > 2):
+		print("called")
 		generate_path()
 		velocity = navigate()
 
