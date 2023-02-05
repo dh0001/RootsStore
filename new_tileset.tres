@@ -1,10 +1,46 @@
-[gd_resource type="TileSet" load_steps=4 format=2]
+[gd_resource type="TileSet" load_steps=12 format=2]
 
 [ext_resource path="res://assets/Interiors_free/16x16/Room_Builder_free_16x16.png" type="Texture" id=1]
 [ext_resource path="res://assets/Interiors_free/16x16/Interiors_free_16x16.png" type="Texture" id=2]
 
+[sub_resource type="NavigationPolygon" id=4]
+vertices = PoolVector2Array( 15.5179, 15.7204, 0.982376, 15.7204, 0.982376, 5.86856, 15.5179, 5.86856 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 15.5179, 15.7204, 0.982376, 15.7204, 0.982376, 5.86856, 15.5179, 5.86856 ) ]
+
+[sub_resource type="NavigationPolygon" id=5]
+vertices = PoolVector2Array( 16, 15.023, 0.935268, 15.023, 0.935268, 0.255737, 16, 0.255737 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 16, 15.023, 0.935268, 15.023, 0.935268, 0.255737, 16, 0.255737 ) ]
+
+[sub_resource type="NavigationPolygon" id=6]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 5.32047, 16, 5.32047 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 16, 16, 0, 16, 0, 5.32047, 16, 5.32047 ) ]
+
+[sub_resource type="NavigationPolygon" id=7]
+vertices = PoolVector2Array( 16, 14.7426, 0, 14.7426, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 16, 14.7426, 0, 14.7426, 0, 0, 16, 0 ) ]
+
+[sub_resource type="NavigationPolygon" id=8]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 5.32047, 16, 5.32047 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 16, 16, 0, 16, 0, 5.32047, 16, 5.32047 ) ]
+
+[sub_resource type="NavigationPolygon" id=9]
+vertices = PoolVector2Array( 16, 15.023, 0, 15.023, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 16, 15.023, 0, 15.023, 0, 0, 16, 0 ) ]
+
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 50.6165, 38.0135, 13.108, 38.0135, 13.108, 8.87735, 50.6165, 8.87735 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 50.0836, 35.1344, 13.6327, 34.4615, 13.7449, 2.60901, 50.0836, 2.49686 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 42.4704, 25.4603, 5.40936, 25.4603, 5.40936, 8.84448, 42.4704, 8.84448 )
 
 [resource]
 0/name = "Room_Builder_free_16x16.png 0"
@@ -42,7 +78,7 @@ points = PoolVector2Array( 50.6165, 38.0135, 13.108, 38.0135, 13.108, 8.87735, 5
 1/autotile/tile_size = Vector2( 16, 16 )
 1/autotile/spacing = 0
 1/autotile/occluder_map = [  ]
-1/autotile/navpoly_map = [  ]
+1/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 4 ), Vector2( 0, 1 ), SubResource( 5 ), Vector2( 1, 0 ), SubResource( 6 ), Vector2( 1, 1 ), SubResource( 7 ), Vector2( 2, 0 ), SubResource( 8 ), Vector2( 2, 1 ), SubResource( 9 ) ]
 1/autotile/priority_map = [  ]
 1/autotile/z_index_map = [  ]
 1/occluder_offset = Vector2( 0, 0 )
@@ -84,9 +120,16 @@ points = PoolVector2Array( 50.6165, 38.0135, 13.108, 38.0135, 13.108, 8.87735, 5
 3/navigation_offset = Vector2( 0, 0 )
 3/shape_offset = Vector2( 0, 0 )
 3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 2 )
 3/shape_one_way = false
-3/shape_one_way_margin = 0.0
-3/shapes = [  ]
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 3/z_index = 0
 4/name = "Interiors_free_16x16.png 4"
 4/texture = ExtResource( 2 )
@@ -168,9 +211,16 @@ points = PoolVector2Array( 50.6165, 38.0135, 13.108, 38.0135, 13.108, 8.87735, 5
 9/navigation_offset = Vector2( 0, 0 )
 9/shape_offset = Vector2( 0, 0 )
 9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape = SubResource( 3 )
 9/shape_one_way = false
-9/shape_one_way_margin = 0.0
-9/shapes = [  ]
+9/shape_one_way_margin = 1.0
+9/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 9/z_index = 0
 10/name = "Room_Builder_free_16x16.png 10"
 10/texture = ExtResource( 1 )
