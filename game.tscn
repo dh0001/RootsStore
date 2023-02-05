@@ -293,6 +293,8 @@ bake_navigation = true
 
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 225, 112 )
+collision_layer = 3
+collision_mask = 3
 script = ExtResource( 10 )
 held_item_sprite_path = NodePath("../CurrentlyHeldItem")
 
