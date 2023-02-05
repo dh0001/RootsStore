@@ -122,7 +122,7 @@ extents = Vector2( 6, 8.5 )
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 5.5, 8.5 )
 
-[node name="game" type="Area2D"]
+[node name="game" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="TileMap" parent="." instance=ExtResource( 6 )]
@@ -329,3 +329,10 @@ texture = ExtResource( 4 )
 position = Vector2( 21, 15 )
 scale = Vector2( 2.1, 2.1 )
 script = ExtResource( 7 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 120.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

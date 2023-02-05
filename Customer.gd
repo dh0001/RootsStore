@@ -105,6 +105,6 @@ func interact(player: KinematicBody2D):
 		
 	var item = player.submit_item()
 	if finish_request(item):
-		print("increasing score")
+		global.score += 100
 	else:
-		print("decrementing score")
+		global.score -= 50

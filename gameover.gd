@@ -6,11 +6,10 @@ extends Node2D
 # var b = "text"
 
 
-# Called when the node enters the scene tree for the first time.
+func _ready():
+	$TileMap2/RichTextLabel.bbcode_text = "Game Over! Your score is: %s\n\n[center]-- Press A to continue --[/center]" % [global.score]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
 
 func _input(event):
 	if event.is_action_pressed("select"):
