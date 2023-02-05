@@ -109,6 +109,7 @@ func request_item(item: String):
 func finish_request(given_item: String) -> bool:
 	if given_item == curr_requested_item:
 		self.get_node("RequestItemTextBox").finish_request()
+		give_item()
 		return true
 	return false
 
