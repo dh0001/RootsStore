@@ -13,4 +13,5 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("select"):
+		global.score = 0
 		get_tree().change_scene("res://game.tscn")

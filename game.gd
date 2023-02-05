@@ -19,3 +19,7 @@ func _ready():
 
 func _on_Timer_timeout():
 	get_tree().change_scene("res://gameover.tscn")
+
+
+func _on_clock_timer_timeout():
+	$Node2D/ProgressBar.value -= 0.1

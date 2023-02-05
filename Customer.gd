@@ -110,6 +110,7 @@ func finish_request(given_item: String) -> bool:
 	if given_item == curr_requested_item:
 		self.get_node("RequestItemTextBox").finish_request()
 		give_item()
+		get_node("/root/game/CustomerSpawner").spawn_customer()
 		return true
 	return false
 
