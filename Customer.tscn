@@ -282,10 +282,13 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=68]
-extents = Vector2( 4, 2.5 )
+[sub_resource type="CapsuleShape2D" id=68]
+radius = 4.0
+height = 2.0
 
 [node name="Customer" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 5 )
 
 [node name="RequestItemTextBox" parent="." instance=ExtResource( 6 )]
@@ -295,7 +298,7 @@ frames = SubResource( 67 )
 animation = "customer1_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 8.5 )
+position = Vector2( 0, 6 )
 shape = SubResource( 68 )
 
 [node name="Line2D" type="Line2D" parent="."]

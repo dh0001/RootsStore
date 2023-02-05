@@ -4,6 +4,7 @@ export(PackedScene) var customer_scene
 
 var max_customers = 5
 var customer_count = 0
+var dest_index = 0
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -37,7 +38,15 @@ func generate_destination():
 		Vector2(280, 170),
 		Vector2(370, 180),
 		Vector2(350, 50),
-		Vector2(285, 150) ]
+		Vector2(285, 150),
+		Vector2(185, 225),
+		Vector2(400, 50),
+		Vector2(250, 225),
+		Vector2(385, 250), ]
 
-	return destinations[randi() % destinations.size()]
+	#return destinations[randi() % destinations.size()]
+	var destination = destinations[dest_index]
+	dest_index += 1
+	dest_index %= destinations.size()
+	return destinations[dest_index]
 

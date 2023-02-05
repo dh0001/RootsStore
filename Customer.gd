@@ -44,7 +44,7 @@ func generate_path():
 func _physics_process(delta):
 	var velocity = Vector2.ZERO
 	line2d.global_position = Vector2.ZERO
-	if customerNavigation and (global_position.distance_to(destination) > 2):
+	if customerNavigation and (global_position.distance_to(destination) > 5):
 		print("called")
 		generate_path()
 		velocity = navigate()
