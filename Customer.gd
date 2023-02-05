@@ -3,12 +3,13 @@ extends KinematicBody2D
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
 onready var direction = Direction.RIGHT
-export var speed = 200 # How fast the player will move (pixels/sec).
+export var speed = 50 # How fast the player will move (pixels/sec).
 
 var cust_type = 0
 
 var path: Array = [] # positions of path
 var customerNavigation: Navigation2D = null
+var destination: Vector2 = Vector2.ZERO
 
 onready var line2d = $Line2D
 
@@ -30,17 +31,18 @@ func navigate():
 	
 func generate_path():
 	if customerNavigation != null:
-		path = customerNavigation.get_simple_path(global_position, Vector2(300,100), false)
+		path = customerNavigation.get_simple_path(global_position, destination, false)
 	line2d.points = path
+
 
 func _physics_process(delta):
 	var velocity = Vector2.ZERO
 	line2d.global_position = Vector2.ZERO
-	if customerNavigation:
+	if customerNavigation and (global_position.distance_to(destination) > 2):
 		generate_path()
 		velocity = navigate()
-	#velocity = get_velocity()
-	var motion = velocity * delta 
+
+	var motion: Vector2 = velocity * delta 
 	
 	set_direction(motion)
 	set_animation(motion.length() == 0)

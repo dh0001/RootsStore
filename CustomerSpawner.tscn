@@ -8,5 +8,6 @@ script = ExtResource( 1 )
 customer_scene = ExtResource( 2 )
 
 [node name="CustSpawnTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="CustSpawnTimer" to="." method="_on_CustSpawnTimer_timeout"]
