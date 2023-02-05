@@ -1,6 +1,7 @@
 extends Area2D
 
 func interact(areas: Array) -> void:
+	print(areas)
 	if areas.size() == 0:
 		return
 	

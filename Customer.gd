@@ -10,6 +10,7 @@ var cust_type = 0
 var path: Array = [] # positions of path
 var customerNavigation: Navigation2D = null
 var destination: Vector2 = Vector2.ZERO
+var curr_requested_item = ""
 
 onready var line2d = $Line2D
 
@@ -89,11 +90,25 @@ func _input(event):
 			if item_idx % 2 == 0:
 				request_item(items[randi() % items.size()])
 			else:
-				finish_request()
+				finish_request(curr_requested_item)
 			item_idx += 1
 				
 func request_item(item: String):
+	curr_requested_item = item
 	self.get_node("RequestItemTextBox").request_item(item)
 
-func finish_request():
-	self.get_node("RequestItemTextBox").finish_request()
+func finish_request(given_item: String) -> bool:
+	if given_item == curr_requested_item:
+		self.get_node("RequestItemTextBox").finish_request()
+		return true
+	return false
+
+func interact(player: KinematicBody2D):
+	if !player.has_item():
+		return
+		
+	var item = player.submit_item()
+	if finish_request(item):
+		print("increasing score")
+	else:
+		print("decrementing score")
