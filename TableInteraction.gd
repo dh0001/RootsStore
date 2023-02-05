@@ -15,6 +15,6 @@ var nodeToItem = {
 	"Shirt2Table": "shirt2",
 }
 
-func interact(player: KinematicBody2D):
+func interact(player: KinematicBody2D) -> void:
 	if player.has_method('acquire_item') and nodeToItem.has(self.name):
 		player.acquire_item(nodeToItem[self.name])

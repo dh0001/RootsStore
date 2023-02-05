@@ -1,6 +1,6 @@
 extends Area2D
 
-func interact(areas: Array):
+func interact(areas: Array) -> void:
 	if areas.size() == 0:
 		return
 	

@@ -3,7 +3,7 @@ extends KinematicBody2D
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
 onready var direction = Direction.RIGHT
-export var speed = 400 # How fast the player will move (pixels/sec).
+export var speed := 400 # How fast the player will move (pixels/sec).
 
 var item: String = ""
 
@@ -11,16 +11,16 @@ func _ready():
 	# face right on start up
 	$AnimatedSprite.animation = "right" 
 	
-func _physics_process(delta):
-	var velocity = get_velocity()
-	var motion = velocity * delta 
+func _physics_process(delta: float) -> void:
+	var velocity := get_velocity()
+	var motion := velocity * delta 
 	
 	set_direction(motion)
 	set_interaction_box()
 	set_animation(motion.length() == 0)
 	move_and_collide(motion)
 	
-func get_velocity():
+func get_velocity() -> Vector2:
 	var velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
@@ -33,7 +33,7 @@ func get_velocity():
 		
 	return velocity.normalized() * speed
 
-func set_direction(motion):
+func set_direction(motion: Vector2) -> void:
 	if motion.x < 0:
 		direction = Direction.LEFT
 	elif motion.x > 0:
@@ -43,13 +43,13 @@ func set_direction(motion):
 	elif motion.y > 0:
 		direction = Direction.DOWN
 
-func set_animation(stop_animation: bool):
+func set_animation(stop_animation: bool) -> void:
 	if stop_animation:
 		$AnimatedSprite.stop()
 		$AnimatedSprite.frame = 1
 		return
 		
-	var dir = "right"
+	var dir := "right"
 	match direction:
 		Direction.UP: dir = "up"
 		Direction.DOWN: dir = "down"
@@ -58,7 +58,7 @@ func set_animation(stop_animation: bool):
 	$AnimatedSprite.animation = dir
 	$AnimatedSprite.play()
 	
-func set_interaction_box():
+func set_interaction_box() -> void:
 	var dirs_dict = {
 		Direction.UP: Vector2(0, -15),
 		Direction.DOWN: Vector2(0, 20),
@@ -68,13 +68,13 @@ func set_interaction_box():
 	var box: CollisionShape2D = get_node(@"InteractionBox/InteractionBoxCollisionShape")
 	box.position = dirs_dict[direction]
 
-func acquire_item(item: String):
+func acquire_item(item: String) -> void:
 	print("acquiring item " + item)
 	item = item
 
-func has_item():
+func has_item() -> bool:
 	return item != ""
 
-func submit_item():
+func submit_item() -> String:
 	item = ""
 	return item
