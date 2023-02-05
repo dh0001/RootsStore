@@ -10,4 +10,5 @@ func interact(areas: Array) -> void:
 		area.interact(self.get_parent())
 
 func _input(ev):
+	if ev.is_action_pressed("select"):
 		interact(self.get_overlapping_bodies())

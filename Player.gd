@@ -83,4 +83,6 @@ func has_item() -> bool:
 func submit_item() -> String:
 	var item_submitting = item
 	item = ""
+	held_item_sprite.set_item_texture("")
 	return item_submitting
+	
