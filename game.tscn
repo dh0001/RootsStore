@@ -20,6 +20,27 @@ extents = Vector2( 247.001, 6.95934 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 7, 141.5 )
 
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 19.5, 18.5 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 19, 11.5 )
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 19, 10.5 )
+
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 19, 18.5 )
+
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 19.5, 18.5 )
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 20.5, 15.5 )
+
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 19, 18.5 )
+
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 24, 24 )
@@ -97,33 +118,9 @@ extents = Vector2( 6, 8.5 )
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 5.5, 8.5 )
 
-[sub_resource type="RectangleShape2D" id=26]
-extents = Vector2( 19.5, 18.5 )
-
-[sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 19, 11.5 )
-
-[sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 19, 10.5 )
-
-[sub_resource type="RectangleShape2D" id=25]
-extents = Vector2( 19, 18.5 )
-
-[sub_resource type="RectangleShape2D" id=24]
-extents = Vector2( 19.5, 18.5 )
-
-[sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 20.5, 15.5 )
-
-[sub_resource type="RectangleShape2D" id=23]
-extents = Vector2( 19, 18.5 )
-
 [node name="game" type="Area2D"]
 position = Vector2( 0, 28 )
 script = ExtResource( 2 )
-
-[node name="TileMap" parent="." instance=ExtResource( 6 )]
-position = Vector2( 0, 16 )
 
 [node name="Boundary" type="StaticBody2D" parent="."]
 
@@ -143,27 +140,6 @@ shape = SubResource( 5 )
 [node name="right" type="CollisionShape2D" parent="Boundary"]
 position = Vector2( 487, 128.5 )
 shape = SubResource( 6 )
-
-[node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 225, 112 )
-script = ExtResource( 10 )
-held_item_sprite_path = NodePath("../CurrentlyHeldItem")
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
-rotation = -0.0123965
-frames = SubResource( 1 )
-animation = "right"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( 0, 2.5 )
-shape = SubResource( 2 )
-
-[node name="InteractionBox" type="Area2D" parent="Player"]
-script = ExtResource( 3 )
-
-[node name="InteractionBoxCollisionShape" type="CollisionShape2D" parent="Player/InteractionBox"]
-position = Vector2( 13, 2.5 )
-shape = SubResource( 20 )
 
 [node name="ItemTables" type="Node2D" parent="."]
 
@@ -298,6 +274,31 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemTables/Shirt2Table"]
 position = Vector2( 1, 2.5 )
 shape = SubResource( 23 )
+
+[node name="TileMap" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, 16 )
+scale = Vector2( 1, 1 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 225, 112 )
+script = ExtResource( 10 )
+held_item_sprite_path = NodePath("../CurrentlyHeldItem")
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
+rotation = -0.0123965
+frames = SubResource( 1 )
+animation = "right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2( 0, 2.5 )
+shape = SubResource( 2 )
+
+[node name="InteractionBox" type="Area2D" parent="Player"]
+script = ExtResource( 3 )
+
+[node name="InteractionBoxCollisionShape" type="CollisionShape2D" parent="Player/InteractionBox"]
+position = Vector2( 13, 2.5 )
+shape = SubResource( 20 )
 
 [node name="CurrentlyHeldItem" type="Sprite" parent="."]
 position = Vector2( 20, -14 )
