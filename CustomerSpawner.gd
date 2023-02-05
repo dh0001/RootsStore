@@ -21,32 +21,13 @@ func _ready():
 
 
 func _on_CustSpawnTimer_timeout():
-	var customer = customer_scene.instance()
+	if customer_count < max_customers:
+		customer_count += 1
+		var customer = customer_scene.instance()
+		customer.position = Vector2(250, 50)
+		
+		add_child(customer)
+		
+func spawn_customer():
+	customer_count -= 1
 	
-	customer.position = Vector2(250, 50)#Vector2(400, 50)
-	customer.destination = generate_destination()
-	add_child(customer)
-	
-	customer_count += 1
-	if customer_count >= max_customers:
-		$CustSpawnTimer.stop()
-	
-func generate_destination():
-	var destinations: Array = [
-		Vector2(100, 120),
-		Vector2(100, 200),
-		Vector2(280, 170),
-		Vector2(370, 180),
-		Vector2(350, 50),
-		Vector2(285, 150),
-		Vector2(185, 225),
-		Vector2(400, 50),
-		Vector2(250, 225),
-		Vector2(385, 250), ]
-
-	#return destinations[randi() % destinations.size()]
-	var destination = destinations[dest_index]
-	dest_index += 1
-	dest_index %= destinations.size()
-	return destinations[dest_index]
-

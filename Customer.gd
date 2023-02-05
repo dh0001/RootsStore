@@ -10,6 +10,9 @@ var cust_type = 0
 var path: Array = [] # positions of path
 var customerNavigation: Navigation2D = null
 var destination: Vector2 = Vector2.ZERO
+var reached_destination: bool = false
+var has_item: bool = false
+
 
 onready var line2d = $Line2D
 
@@ -20,6 +23,11 @@ func _ready():
 	cust_type = (randi() % 4) + 1
 	
 	customerNavigation = get_node("/root/game/CustomerNavigation")
+	new_destination()
+	
+func new_destination():
+	destination = Vector2(rand_range(50,475), rand_range(50,250))
+	destination = customerNavigation.get_closest_point(destination)
 	
 func navigate():
 	var velocity = Vector2.ZERO
@@ -39,14 +47,28 @@ func generate_path():
 		path = customerNavigation.get_simple_path(global_position, destination, false)
 	line2d.points = path
 
+func give_item():
+	has_item = true
+	reached_destination = false
+	destination = Vector2(250,50)
 
 func _physics_process(delta):
 	var velocity = Vector2.ZERO
 	line2d.global_position = Vector2.ZERO
-	if customerNavigation and (global_position.distance_to(destination) > 5):
-		print("called")
-		generate_path()
-		velocity = navigate()
+	
+	if reached_destination:
+		if has_item:
+			queue_free()
+		else:	
+			reached_destination = false
+			new_destination()
+		
+	if customerNavigation:
+		if (global_position.distance_to(destination) > 5):
+			generate_path()
+			velocity = navigate()
+		else:
+			reached_destination = true
 
 	var motion: Vector2 = velocity * delta 
 	
