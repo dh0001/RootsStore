@@ -44,4 +44,7 @@ func request_item(item: String):
 	item_sprite.position.y = -19
 	item_sprite.scale = Vector2(1, 1)
 	item_sprite.set_texture(item_texture)
-	
+
+func finish_request():
+	bubble_sprite.set_texture(null)
+	item_sprite.set_texture(null)

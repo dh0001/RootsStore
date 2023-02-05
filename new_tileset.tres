@@ -130,14 +130,8 @@ points = PoolVector2Array( 50.6165, 38.0135, 13.108, 38.0135, 13.108, 8.87735, 5
 3/shape_offset = Vector2( 0, 0 )
 3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 3/shape_one_way = false
-3/shape_one_way_margin = 1.0
-3/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": null,
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
 3/z_index = 0
 4/name = "Interiors_free_16x16.png 4"
 4/texture = ExtResource( 2 )
@@ -220,14 +214,8 @@ points = PoolVector2Array( 50.6165, 38.0135, 13.108, 38.0135, 13.108, 8.87735, 5
 9/shape_offset = Vector2( 0, 0 )
 9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 9/shape_one_way = false
-9/shape_one_way_margin = 1.0
-9/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": null,
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
+9/shape_one_way_margin = 0.0
+9/shapes = [  ]
 9/z_index = 0
 10/name = "Room_Builder_free_16x16.png 10"
 10/texture = ExtResource( 1 )
