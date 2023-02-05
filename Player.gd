@@ -2,15 +2,18 @@ extends KinematicBody2D
 
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
-onready var direction = Direction.RIGHT
-export var speed := 400 # How fast the player will move (pixels/sec).
+export var speed :=  100 # How fast the player will move (pixels/sec).
+export(NodePath) var held_item_sprite_path
+var held_item_sprite: Sprite
+var item: String = "" 
 
-var item: String = ""
+onready var direction = Direction.RIGHT
 
 func _ready():
 	# face right on start up
 	$AnimatedSprite.animation = "right" 
-	
+	held_item_sprite = get_node(held_item_sprite_path)
+
 func _physics_process(delta: float) -> void:
 	var velocity := get_velocity()
 	var motion := velocity * delta 
@@ -68,13 +71,16 @@ func set_interaction_box() -> void:
 	var box: CollisionShape2D = get_node(@"InteractionBox/InteractionBoxCollisionShape")
 	box.position = dirs_dict[direction]
 
-func acquire_item(item: String) -> void:
-	print("acquiring item " + item)
-	item = item
+func acquire_item(other_item: String) -> void:
+	print("acquiring item " + other_item)
+	item = other_item
+	if held_item_sprite.has_method("set_item_texture"):
+		held_item_sprite.set_item_texture(other_item)
 
 func has_item() -> bool:
-	return item != ""
+	return self.item != ""
 
 func submit_item() -> String:
+	var item_submitting = item
 	item = ""
-	return item
+	return item_submitting
