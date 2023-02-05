@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://art/player_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://game.gd" type="Script" id=2]
@@ -94,11 +94,6 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 8.5 )
 
-[sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 6, 8.5 )
-
-[sub_resource type="RectangleShape2D" id=20]
-
 [node name="game" type="Area2D"]
 script = ExtResource( 2 )
 
@@ -143,14 +138,12 @@ script = ExtResource( 3 )
 
 [node name="InteractionBoxCollisionShape" type="CollisionShape2D" parent="Player/InteractionBox"]
 position = Vector2( 13, 2.5 )
-shape = SubResource( 19 )
 
 [node name="ClothesTable" type="StaticBody2D" parent="."]
 position = Vector2( 65, 65 )
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClothesTable"]
-shape = SubResource( 20 )
 
 [node name="Sprite" type="Sprite" parent="ClothesTable"]
 position = Vector2( -1.90735e-06, 9.53674e-07 )
