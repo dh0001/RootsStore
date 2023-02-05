@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/heel2.png-4309a585e67cc6cc2a0d5a58e14adf7d.stex"
+path="res://.import/Room_Builder_free_16x16.png-848d2bfc4c08008a37be9c38f4cd5148.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/clothes_sprites/heel2.png"
-dest_files=[ "res://.import/heel2.png-4309a585e67cc6cc2a0d5a58e14adf7d.stex" ]
+source_file="res://assets/Interiors_free/16x16/Room_Builder_free_16x16.png"
+dest_files=[ "res://.import/Room_Builder_free_16x16.png-848d2bfc4c08008a37be9c38f4cd5148.stex" ]
 
 [params]
 
