@@ -84,14 +84,3 @@ func submit_item() -> String:
 	var item_submitting = item
 	item = ""
 	return item_submitting
-
-var items = ["bag1", "bag2", "boot1", "boot2", "hat1", "hat2", "heel1",
-	"heel2", "pants1", "pants2", "shirt1", "shirt2"]
-var item_idx = 0
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.scancode == KEY_B:
-			var textbox = self.get_node("RequestItemTextBox")
-			if textbox.has_method("request_item"):
-				textbox.request_item(items[item_idx % items.size()])
-				item_idx += 1

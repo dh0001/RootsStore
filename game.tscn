@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://art/player_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://game.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://RequestItemTextBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://CustomerSpawner.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player.gd" type="Script" id=10]
+[ext_resource path="res://nav_map.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6.9375, 136.5 )
@@ -123,6 +124,10 @@ extents = Vector2( 5.5, 8.5 )
 
 [node name="game" type="Area2D"]
 script = ExtResource( 2 )
+
+[node name="TileMap" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, 16 )
+bake_navigation = true
 
 [node name="Boundary" type="StaticBody2D" parent="."]
 
@@ -277,9 +282,12 @@ __meta__ = {
 position = Vector2( 1, 2.5 )
 shape = SubResource( 23 )
 
-[node name="Navigation2D" type="Navigation2D" parent="."]
+[node name="CustomerNavigation" type="Navigation2D" parent="."]
 
-[node name="TileMap" parent="Navigation2D" instance=ExtResource( 6 )]
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="CustomerNavigation"]
+
+[node name="NavTilemap" parent="CustomerNavigation" instance=ExtResource( 11 )]
+visible = false
 position = Vector2( 0, 16 )
 bake_navigation = true
 
@@ -306,6 +314,8 @@ script = ExtResource( 3 )
 position = Vector2( 13, 2.5 )
 shape = SubResource( 20 )
 
+[node name="CustomerSpawner" parent="." instance=ExtResource( 9 )]
+
 [node name="ItemGui" type="Sprite" parent="."]
 position = Vector2( 21, 15 )
 scale = Vector2( 1.66667, 1.16667 )
@@ -315,5 +325,3 @@ texture = ExtResource( 4 )
 position = Vector2( 21, 15 )
 scale = Vector2( 2.1, 2.1 )
 script = ExtResource( 7 )
-
-[node name="CustomerSpawner" parent="." instance=ExtResource( 9 )]
