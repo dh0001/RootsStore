@@ -2,6 +2,8 @@ extends Node
 
 export(PackedScene) var customer_scene
 
+var max_customers = 5
+var customer_count = 0
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -23,6 +25,10 @@ func _on_CustSpawnTimer_timeout():
 	customer.position = Vector2(250, 50)#Vector2(400, 50)
 	customer.destination = generate_destination()
 	add_child(customer)
+	
+	customer_count += 1
+	if customer_count >= max_customers:
+		$CustSpawnTimer.stop()
 	
 func generate_destination():
 	var destinations: Array = [
